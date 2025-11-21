@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>snail_corallivore_analysis</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#corallivorous-snail-analysis"
+id="toc-corallivorous-snail-analysis">Corallivorous Snail Analysis</a>
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a>
+<ul>
+<li><a href="#key-questions" id="toc-key-questions">Key
+Questions</a></li>
+</ul></li>
+<li><a href="#data-summary" id="toc-data-summary">Data Summary</a>
+<ul>
+<li><a href="#snail-species-identified"
+id="toc-snail-species-identified">Snail Species Identified</a></li>
+</ul></li>
+<li><a href="#results" id="toc-results">Results</a>
+<ul>
+<li><a href="#snail-abundance-by-coral-number"
+id="toc-snail-abundance-by-coral-number">1. Snail Abundance by Coral
+Number</a></li>
+<li><a href="#snail-species-richness" id="toc-snail-species-richness">2.
+Snail Species Richness</a></li>
+<li><a href="#hyperaggregation-pattern"
+id="toc-hyperaggregation-pattern">3. Hyperaggregation Pattern</a></li>
+<li><a href="#snail-abundance-vs-coral-performance"
+id="toc-snail-abundance-vs-coral-performance">4. Snail Abundance vs
+Coral Performance</a></li>
+<li><a href="#species-level-patterns" id="toc-species-level-patterns">5.
+Species-Level Patterns</a></li>
+</ul></li>
+<li><a href="#summary-and-interpretation"
+id="toc-summary-and-interpretation">Summary and Interpretation</a>
+<ul>
+<li><a href="#key-findings" id="toc-key-findings">Key Findings</a></li>
+<li><a href="#biological-interpretation"
+id="toc-biological-interpretation">Biological Interpretation</a></li>
+</ul></li>
+<li><a href="#conclusions" id="toc-conclusions">Conclusions</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="corallivorous-snail-analysis">Corallivorous Snail Analysis</h1>
+<p><strong>Author:</strong> MRB CAFI Analysis <strong>Date:</strong>
+November 20, 2025</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This analysis examines corallivorous and coral-associated snail
+(gastropod) patterns in response to experimental coral density
+manipulation. We address the reviewer comment regarding the notable
+hyperaggregation of snails on multi-coral reefs.</p>
+<h3 id="key-questions">Key Questions</h3>
+<ol type="1">
+<li><strong>How did snail abundance shift with coral
+number?</strong></li>
+<li><strong>Were snail distributions clustered (hyperaggregated) on
+6-coral reefs?</strong></li>
+<li><strong>How were snails correlated with coral
+performance?</strong></li>
+</ol>
+<hr />
+<h2 id="data-summary">Data Summary</h2>
+<h3 id="snail-species-identified">Snail Species Identified</h3>
+<p>The following gastropod genera were identified as coral-associated
+snails:</p>
+<ul>
+<li><em>Strigatella assimilis</em></li>
+<li><em>Galeropsis monodonta</em></li>
+<li><em>Vexillum interruptum</em></li>
+<li><em>Coralliophila</em> sp.</li>
+<li><em>Macteola interrupta</em></li>
+<li><em>Mitrella moleculina</em></li>
+<li><em>Morula zebrina</em></li>
+<li><em>Vexillum roseum</em></li>
+<li><em>Vexillum tusum</em></li>
+<li><em>Morula uva</em></li>
+<li><em>Drupella margariticola</em></li>
+<li><em>Vexillum aureolatum</em></li>
+</ul>
+<p><strong>Total snail species in dataset:</strong> 13</p>
+<hr />
+<h2 id="results">Results</h2>
+<h3 id="snail-abundance-by-coral-number">1. Snail Abundance by Coral
+Number</h3>
+<figure>
+<img src="snail_abundance_by_treatment.png" alt="Snail Abundance" />
+<figcaption aria-hidden="true">Snail Abundance</figcaption>
+</figure>
+<h4 id="summary-statistics">Summary Statistics</h4>
+<table>
+<thead>
+<tr>
+<th>Treatment</th>
+<th>n</th>
+<th>Mean Abundance</th>
+<th>SE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 coral</td>
+<td>14</td>
+<td>21.50</td>
+<td>3.59</td>
+</tr>
+<tr>
+<td>3 corals</td>
+<td>15</td>
+<td>27.73</td>
+<td>6.35</td>
+</tr>
+<tr>
+<td>6 corals</td>
+<td>15</td>
+<td>27.07</td>
+<td>3.65</td>
+</tr>
+</tbody>
+</table>
+<h4 id="statistical-test">Statistical Test</h4>
+<p><strong>Linear Mixed Model:</strong>
+<code>total_snails ~ treatment + (1|reef)</code></p>
+<ul>
+<li><strong>F-statistic:</strong> 0.43</li>
+<li><strong>p-value:</strong> 0.660</li>
+</ul>
+<p><strong>Interpretation:</strong> Treatment effect not statistically
+significant. Total snail abundance did not differ significantly among
+treatments.</p>
+<hr />
+<h3 id="snail-species-richness">2. Snail Species Richness</h3>
+<figure>
+<img src="snail_richness_by_treatment.png" alt="Snail Richness" />
+<figcaption aria-hidden="true">Snail Richness</figcaption>
+</figure>
+<h4 id="summary-statistics-1">Summary Statistics</h4>
+<table>
+<thead>
+<tr>
+<th>Treatment</th>
+<th>Mean Richness</th>
+<th>SE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 coral</td>
+<td>2.57</td>
+<td>0.31</td>
+</tr>
+<tr>
+<td>3 corals</td>
+<td>2.60</td>
+<td>0.25</td>
+</tr>
+<tr>
+<td>6 corals</td>
+<td>3.53</td>
+<td>0.29</td>
+</tr>
+</tbody>
+</table>
+<h4 id="statistical-test-1">Statistical Test</h4>
+<p><strong>Linear Mixed Model:</strong>
+<code>snail_richness ~ treatment + (1|reef)</code></p>
+<ul>
+<li><strong>F-statistic:</strong> 3.73</li>
+<li><strong>p-value:</strong> 0.032</li>
+</ul>
+<p><strong>Interpretation:</strong> Significant treatment effect
+detected. Snail species richness was significantly higher on 6-coral
+reefs compared to 1- and 3-coral reefs.</p>
+<hr />
+<h3 id="hyperaggregation-pattern">3. Hyperaggregation Pattern</h3>
+<p>To assess whether snails showed hyperaggregation
+(stronger-than-expected increase with coral number), we compare the
+fold-increase from 1-coral to 6-coral treatments.</p>
+<p><strong>Expected under proportional scaling:</strong> 6× increase (6
+corals vs 1 coral)</p>
+<p><strong>Observed:</strong> - Mean snails on 1-coral reefs: 21.50 -
+Mean snails on 6-coral reefs: 27.07 - <strong>Fold increase:</strong>
+1.26×</p>
+<p><strong>Interpretation:</strong> This represents
+<strong>hypoaggregation</strong> - snails increased less than
+proportionally with coral number. However, this pattern masks the
+significant increase in species richness, suggesting that while total
+abundance doesn’t scale with coral number, the diversity of snail
+species does.</p>
+<hr />
+<h3 id="snail-abundance-vs-coral-performance">4. Snail Abundance vs
+Coral Performance</h3>
+<figure>
+<img src="snail_vs_performance.png" alt="Snail vs Performance" />
+<figcaption aria-hidden="true">Snail vs Performance</figcaption>
+</figure>
+<h4 id="correlation-analysis">Correlation Analysis</h4>
+<ul>
+<li><strong>Pearson correlation (r):</strong> -0.076</li>
+<li><strong>p-value:</strong> 0.625</li>
+</ul>
+<p><strong>Interpretation:</strong> No significant correlation between
+snail abundance and coral performance (PC1). Snail abundance does not
+predict coral condition.</p>
+<hr />
+<h3 id="species-level-patterns">5. Species-Level Patterns</h3>
+<figure>
+<img src="snail_species_heatmap.png" alt="Species Heatmap" />
+<figcaption aria-hidden="true">Species Heatmap</figcaption>
+</figure>
+<h4 id="individual-species-results">Individual Species Results</h4>
+<p><strong>Morula zebrina</strong> (predatory snail) - Treatment effect:
+F = 3.77, <strong>p = 0.031</strong> - Correlation with PC1: r = -0.036,
+p = 0.818 - <em>Significantly more abundant on 6-coral reefs</em></p>
+<p><strong>Galeropsis monodonta</strong> - Treatment effect: F = 0.37, p
+= 0.695 - Correlation with PC1: r = -0.063, p = 0.683</p>
+<p><strong>Strigatella assimilis</strong> - Treatment effect: F = 2.29,
+p = 0.129 - Correlation with PC1: r = -0.046, p = 0.765</p>
+<p><strong>Coralliophila sp.</strong> (known corallivore) - Treatment
+effect: F = 0.76, p = 0.494 - Correlation with PC1: r = 0.034, p =
+0.826</p>
+<p><strong>Mitrella moleculina</strong> - Treatment effect: F = 2.01, p
+= 0.161 - Correlation with PC1: r = -0.242, p = 0.114</p>
+<p><strong>Macteola interrupta</strong> - Treatment effect: F = 1.08, p
+= 0.359 - Correlation with PC1: r = -0.163, p = 0.290</p>
+<p><strong>Vexillum interruptum</strong> - Treatment effect: F = 0.10, p
+= 0.908 - Correlation with PC1: r = 0.085, p = 0.584</p>
+<hr />
+<h2 id="summary-and-interpretation">Summary and Interpretation</h2>
+<h3 id="key-findings">Key Findings</h3>
+<ol type="1">
+<li><p><strong>Snail total abundance did not change significantly with
+coral number</strong> (F = 0.43, p = 0.660)</p></li>
+<li><p><strong>Snail species richness increased significantly with coral
+number</strong> (F = 3.73, p = 0.032)</p>
+<ul>
+<li>6-coral reefs had ~37% more snail species than 1-coral reefs</li>
+</ul></li>
+<li><p><strong>No hyperaggregation in total abundance:</strong> Snails
+showed only a 1.3-fold increase from 1-coral to 6-coral treatments, well
+below the 6× expected under proportional scaling.</p></li>
+<li><p><strong>No relationship with coral performance:</strong> Snail
+abundance was not significantly correlated with coral condition (r =
+-0.076, p = 0.625)</p></li>
+<li><p><strong>One species showed significant treatment
+effects:</strong> <em>Morula zebrina</em> was significantly more
+abundant on 6-coral reefs (p = 0.031)</p></li>
+</ol>
+<h3 id="biological-interpretation">Biological Interpretation</h3>
+<p>The lack of relationship between snail abundance and coral
+performance suggests these gastropods may have neutral effects on coral
+hosts, or that positive and negative effects cancel out across species.
+Importantly:</p>
+<ol type="1">
+<li><p><strong>Species richness increases but not abundance</strong> -
+This suggests multi-coral reefs provide habitat for more snail species
+but don’t support higher densities per species.</p></li>
+<li><p><strong>No evidence for snail-mediated coral decline</strong> -
+The non-significant correlation between snail abundance and coral
+performance (PC1) does not support the hypothesis that gastropods are
+driving the observed density-dependent decline in coral
+condition.</p></li>
+<li><p><strong>Individual species patterns are weak</strong> - Only 1 of
+7 tested species showed significant treatment effects, and none showed
+significant correlations with coral performance.</p></li>
+</ol>
+<hr />
+<h2 id="conclusions">Conclusions</h2>
+<p><strong>Contrary to expectations, snails did NOT show strong
+hyperaggregation on multi-coral reefs.</strong> While species richness
+was significantly higher on 6-coral reefs (p = 0.032), total snail
+abundance did not differ among treatments (p = 0.660).</p>
+<p><strong>Snails are unlikely to be the primary driver of
+density-dependent coral decline.</strong> The lack of correlation
+between snail abundance and coral performance (r = -0.076, p = 0.625)
+suggests that gastropods are not responsible for the observed reduction
+in coral condition at high densities.</p>
+<p>These results indicate that while Joe’s observation about snail
+diversity on multi-coral reefs is supported, the hypothesis that
+corallivorous snails mediate density-dependent coral decline is not
+supported by these data.</p>
+<hr />
+<p><em>Analysis generated: 2025-11-20</em></p>
+</body>
+</html>

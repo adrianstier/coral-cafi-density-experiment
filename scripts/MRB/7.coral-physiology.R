@@ -476,10 +476,19 @@ write_csv(treat_tests,
 
 
 # Plots
+# Create more intuitive facet labels
+metric_labels <- c(
+  "afdw_mg_cm2" = "AFDW (mg/cm²)",
+  "carb_mg_cm2" = "Carbohydrate (mg/cm²)",
+  "protein_mg_cm2" = "Protein (mg/cm²)",
+  "zoox_cells_cm2" = "Zooxanthellae (cells/cm²)"
+)
+
 p_physio_trt <- physio_metrics_df %>%
   pivot_longer(cols = dplyr::all_of(physio_vars),
                names_to = "metric",
                values_to = "value") %>%
+  mutate(metric = factor(metric, levels = names(metric_labels), labels = metric_labels)) %>%
   ggplot(aes(x = treatment, y = value, fill = treatment)) +
   geom_violin(trim = FALSE, alpha = 0.6, colour = NA) +
   geom_boxplot(width = 0.2, fill = "white", outlier.shape = NA, alpha = 0.95) +

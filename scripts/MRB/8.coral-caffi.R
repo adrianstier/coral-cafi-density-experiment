@@ -901,13 +901,21 @@ library(forcats)
 
 # Colors already defined at top: cols_trt = TREATMENT_COLORS
 
+# Colors for taxonomic groups (distinct from treatment colors to avoid confusion)
+cols_taxon <- c(
+  "Fishes"        = "#2E86AB",  # blue
+  "Shrimps/Crabs" = "#A23B72",  # magenta/pink
+  "Snails"        = "#F18F01"   # orange
+)
+
 # Build data for RAW: scatter inputs + top-|loading| species with parse-ready labels
+# Now includes taxonomic group assignment for coloring
 .make_row_data_raw_2p <- function(res_raw) {
   df_pca <- res_raw$scores_comm %>%
     dplyr::inner_join(res_raw$scores_cond, by = "coral_id") %>%
     dplyr::left_join(growth %>% dplyr::select(coral_id, treatment), by = "coral_id") %>%
     dplyr::mutate(treatment = factor(treatment, levels = c("1","3","6")))
-  
+
   df_comm_load <- tibble::tibble(
     feature = rownames(res_raw$pca_comm$rotation),
     loading = res_raw$pca_comm$rotation[, 1]
@@ -916,9 +924,29 @@ library(forcats)
     dplyr::slice_head(n = TOP_N_LOAD) %>%
     dplyr::mutate(
       feature_label = paste0("italic(", gsub(" ", "~", feature), ")"),
-      feature_label = forcats::fct_inorder(feature_label)
+      # Assign taxonomic group based on known species
+      taxon_group = dplyr::case_when(
+        # Fishes (Actinopterygii)
+        grepl("Dascyllus|Caracanthus|Halichoeres|Paragobiodon|Gobiodon|Plectroglyphidodon|Stegastes|Pomacentrus", feature) ~ "Fishes",
+        # Shrimps and Crabs (Malacostraca)
+        grepl("Trapezia|Tetralia|Alpheus|Synalpheus|Periclimenes|Harpiliopsis|Calcinus|Fennera|Galathea|Thor|Athanas|Cinetorhynchus|Saron|Urocaridella|Pagurixus|Luniella", feature) ~ "Shrimps/Crabs",
+        # Snails (Gastropoda)
+        grepl("Morula|Mitrella|Galeropsis|Macteola|Chlorodiella|Pascula|Cellana|Menaethius|Vexillum|Strigatella|Apatasia|Coralliophila|Drupella|Quoyula", feature) ~ "Snails",
+        TRUE ~ "Fishes"  # Default fallback
+      ),
+      taxon_group = factor(taxon_group, levels = c("Fishes", "Shrimps/Crabs", "Snails"))
     )
-  
+
+  # Option 1: Keep ordering by loading (Craig's first suggestion)
+  df_comm_load <- df_comm_load %>%
+    dplyr::mutate(feature_label = forcats::fct_inorder(feature_label))
+
+  # Option 2 (alternative): Order by group then by loading within group
+  # Uncomment below to use Craig's second suggestion
+  # df_comm_load <- df_comm_load %>%
+  #   dplyr::arrange(taxon_group, dplyr::desc(loading)) %>%
+  #   dplyr::mutate(feature_label = forcats::fct_inorder(feature_label))
+
   list(df_pca = df_pca, df_comm_load = df_comm_load)
 }
 
@@ -931,22 +959,24 @@ library(forcats)
     geom_smooth(method = "lm", se = TRUE, colour = "black") +
     scale_fill_manual(values = cols_trt, name = "Coral number") +
     labs(
-      x = expression(PC[1]["CAFI"]),   # PC with subscript 1 and subscript "CAFI" (upright, uppercase)
-      y = expression(PC[1]["coral"])   # PC with subscript 1 and subscript "coral" (upright)
+      x = expression(PC1[CAFI]),   # PC1 with subscript "CAFI"
+      y = expression(PC1[coral])   # PC1 with subscript "coral"
     ) +
-    theme_pub()
+    theme_pub() +
+    theme(legend.position = "top")
 }
 
 # Panel B: top loadings on Community PC1 (positives at top)
+# Now colored by taxonomic group (per Craig Osenberg's suggestion)
 .make_comm_load_raw_2p <- function(df_comm_load) {
   df_comm_load <- df_comm_load %>%
     dplyr::arrange(dplyr::desc(loading)) %>%
     dplyr::mutate(feature_label = forcats::fct_inorder(feature_label))
 
   ggplot(df_comm_load, aes(x = feature_label, y = loading)) +
-    geom_segment(aes(xend = feature_label, y = 0, yend = loading),
-                 colour = "darkgray", linewidth = 0.4) +
-    geom_point(colour = "black", size = 2) +
+    geom_segment(aes(xend = feature_label, y = 0, yend = loading, colour = taxon_group),
+                 linewidth = 0.5) +
+    geom_point(aes(fill = taxon_group), shape = 21, colour = "black", size = 2.5, stroke = 0.3) +
     coord_flip() +
     geom_hline(yintercept = 0, linetype = "dashed", colour = "gray60") +
     scale_x_discrete(labels = function(x) parse(text = x)) +
@@ -954,11 +984,15 @@ library(forcats)
       expand = expansion(mult = c(0.08, 0.08)),   # extra space so dots don't sit on axes
       breaks = function(lims) unique(sort(c(scales::pretty_breaks(4)(lims), 0)))
     ) +
-    labs(x = NULL, y = expression(Loading~on~PC[1])) +
+    scale_fill_manual(values = cols_taxon, name = "Taxon") +
+    scale_colour_manual(values = cols_taxon, guide = "none") +  # match segment colors, hide duplicate legend
+    labs(x = NULL, y = expression(Loading~on~PC1[CAFI])) +
     theme_pub(base_size = 10) +
     theme(
       axis.text.y = element_text(size = 8, margin = margin(r = 2)),
-      plot.margin = margin(5, 5, 5, 10)
+      plot.margin = margin(5, 5, 5, 10),
+      legend.position = "top",
+      legend.box.margin = margin(b = -5)
     )
 }
 
@@ -1728,10 +1762,27 @@ if (length(plot_species) == 0L) {
     dplyr::left_join(label_df, by = "species") %>%
     dplyr::mutate(species_label = factor(species_label, levels = label_df$species_label))
   
-  # Palette per species (hidden legend)
-  # Custom species palette: keep within the Okabe-Ito family but avoid treatment hues
-  base_cols <- c("#0072B2", "#CC79A7", "#F0E442", "#D55E00", "#999999", "#7A4EAB")
-  pal_cols  <- stats::setNames(base_cols[seq_along(plot_species)], plot_species)
+  # Palette per species using taxonomic colors (matching Figure 5 per Craig's suggestion)
+  # Fishes = blue, Shrimps/Crabs = magenta/pink, Snails = orange
+  taxon_cols <- c(
+    "Fishes"        = "#2E86AB",  # blue
+    "Shrimps/Crabs" = "#A23B72",  # magenta/pink
+    "Snails"        = "#F18F01"   # orange
+  )
+
+  # Assign taxonomic group to each species
+  species_taxon <- c(
+    "Caracanthus maculatus"   = "Fishes",
+    "Luniella pugil"          = "Shrimps/Crabs",
+    "Alpheus diadema"         = "Shrimps/Crabs",
+    "Calcinus latens"         = "Shrimps/Crabs",
+    "Harpiliopsis spinigera"  = "Shrimps/Crabs",
+    "Dascyllus flavicaudus"   = "Fishes"
+  )
+
+  # Map each species to its taxonomic color
+  base_cols <- sapply(plot_species, function(sp) taxon_cols[species_taxon[sp]])
+  pal_cols  <- stats::setNames(base_cols, plot_species)
   
   # ---- Breaks helper: rounder arithmetic labels, ≥3 ticks, sqrt spacing ------
   sqrt_breaks_smart <- function(lims) {
@@ -1847,7 +1898,7 @@ if (length(plot_species) == 0L) {
     align = "hv",
     axis = "tblr",
     labels = LETTERS[1:6],
-    label_size = 16,
+    label_size = 12,
     label_fontface = "bold",
     label_x = 0.95,
     label_y = 0.96,
@@ -1857,24 +1908,52 @@ if (length(plot_species) == 0L) {
 
   # Add shared axis labels
   y_label <- grid::textGrob(
-    expression(Coral~condition~(PC[1][coral])),
+    expression(PC1[coral]),
     gp = grid::gpar(fontsize = 13, fontface = "bold"),
     rot = 90
   )
 
   x_label <- grid::textGrob(
-    "Abundance (square-root axis)",
-    gp = grid::gpar(fontsize = 13, fontface = "bold")
+    "Abundance (no. / coral)",
+    gp = grid::gpar(fontsize = 13)
   )
 
-  # Combine with axis labels
+  # Create legend for taxonomic groups
+  legend_data <- data.frame(
+    taxon = factor(c("Fishes", "Shrimps/Crabs"), levels = c("Fishes", "Shrimps/Crabs")),
+    x = 1:2, y = 1:2
+  )
+
+  p_legend <- ggplot2::ggplot(legend_data, ggplot2::aes(x = x, y = y, fill = taxon)) +
+    ggplot2::geom_point(shape = 21, size = 4, color = "black", stroke = 0.3) +
+    ggplot2::scale_fill_manual(
+      values = c("Fishes" = "#2E86AB", "Shrimps/Crabs" = "#A23B72"),
+      name = NULL
+    ) +
+    ggplot2::guides(fill = ggplot2::guide_legend(
+      direction = "horizontal",
+      override.aes = list(size = 4)
+    )) +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      legend.position = "bottom",
+      legend.text = ggplot2::element_text(size = 10),
+      legend.key.size = grid::unit(0.8, "lines"),
+      legend.spacing.x = grid::unit(0.5, "cm")
+    )
+
+  # Extract legend
+  legend_grob <- cowplot::get_legend(p_legend)
+
+  # Combine with axis labels and legend (legend on top)
   p_faceted <- cowplot::plot_grid(
     y_label,
     cowplot::plot_grid(
+      legend_grob,
       p_combined,
       x_label,
       ncol = 1,
-      rel_heights = c(1, 0.05)
+      rel_heights = c(0.06, 1, 0.05)
     ),
     nrow = 1,
     rel_widths = c(0.05, 1)

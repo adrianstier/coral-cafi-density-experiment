@@ -526,15 +526,17 @@ exp_line_df <- baseline_t1 %>%
   mutate(expected = baseline_mean * treatment)
 
 # --- D) Per-panel y ranges (include 0; small padding)
+# Include observed CIs, bootstrap CIs, AND expected line values to ensure full visibility
 rng_df <- dplyr::bind_rows(
   dplyr::transmute(obs_plot, panel, ymin = pmin(lower_obs, 0), ymax = upper_obs),
-  dplyr::transmute(boot_plot, panel, ymin = pmin(lower_np,  0), ymax = upper_np)
+  dplyr::transmute(boot_plot, panel, ymin = pmin(lower_np,  0), ymax = upper_np),
+  dplyr::transmute(exp_line_df, panel, ymin = 0, ymax = expected)  # Include expected line
 ) %>%
   group_by(panel) %>%
   summarise(ymin = min(ymin, na.rm = TRUE),
             ymax = max(ymax, na.rm = TRUE),
             .groups = "drop") %>%
-  mutate(pad = 0.02 * pmax(1e-9, ymax - ymin),
+  mutate(pad = 0.05 * pmax(1e-9, ymax - ymin),  # Increased padding from 0.02 to 0.05
          ymin = ymin - pad,
          ymax = ymax + pad)
 
