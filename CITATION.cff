@@ -1,14 +1,34 @@
 cff-version: 1.2.0
 message: If you use this software, please cite it as below.
+type: software
 title: Habitat quantity drives community assembly and feedbacks to coral performance
-authors:
-  - family-names: Stier
-    given-names: Adrian C.
-  - family-names: Primo
-    given-names: Alexander
-  - family-names: Curtis
-    given-names: Joseph S.
-  - family-names: Osenberg
-    given-names: Craig W.
 version: 1.0.0
 date-released: 2026-01-13
+url: https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT
+repository-code: https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT
+license: CC-BY-4.0
+authors:
+  - given-names: Adrian C.
+    family-names: Stier
+    email: adrian.stier@lifesci.ucsb.edu
+    affiliation: Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara
+    orcid: https://orcid.org/0000-0002-3494-0526
+  - given-names: Alexander
+    family-names: Primo
+    affiliation: Odum School of Ecology, University of Georgia
+  - given-names: Joseph S.
+    family-names: Curtis
+    affiliation: Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara
+  - given-names: Craig W.
+    family-names: Osenberg
+    affiliation: Odum School of Ecology, University of Georgia
+keywords:
+  - coral reef ecology
+  - community assembly
+  - habitat quantity
+  - density dependence
+  - coral-associated fauna
+  - Pocillopora
+  - Moorea
+  - field experiment
+abstract: Analysis code and data for a field experiment examining how coral habitat quantity affects coral-associated fish and invertebrate community assembly and feedbacks to coral performance in Moorea, French Polynesia. Includes R scripts for statistical analyses, figure generation, and reproducibility documentation.
