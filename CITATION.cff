@@ -4,7 +4,7 @@ title: "Habitat quantity drives community assembly and feedbacks to coral perfor
 type: software
 authors:
   - family-names: Stier
-    given-names: Adrian C.
+    given-names: "Adrian C."
     email: adrian.stier@lifesci.ucsb.edu
     affiliation: "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara"
     orcid: "https://orcid.org/0000-0002-3494-0526"
@@ -12,13 +12,13 @@ authors:
     given-names: Alexander
     affiliation: "Odum School of Ecology, University of Georgia"
   - family-names: Curtis
-    given-names: Joseph S.
+    given-names: "Joseph S."
     affiliation: "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara; Bigelow Laboratory for Ocean Sciences"
   - family-names: Osenberg
-    given-names: Craig W.
+    given-names: "Craig W."
     affiliation: "Odum School of Ecology, University of Georgia"
 version: 1.0.0
-date-released: 2025-01-11
+date-released: 2026-01-13
 repository-code: "https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT"
 license: CC-BY-4.0
 keywords:
@@ -41,14 +41,14 @@ references:
   - type: article
     authors:
       - family-names: Stier
-        given-names: Adrian C.
+        given-names: "Adrian C."
       - family-names: Primo
         given-names: Alexander
       - family-names: Curtis
-        given-names: Joseph S.
+        given-names: "Joseph S."
       - family-names: Osenberg
-        given-names: Craig W.
+        given-names: "Craig W."
     title: "Habitat quantity drives community assembly and feedbacks to coral performance"
     journal: "Ecology Letters"
-    year: 2025
+    year: 2026
     status: "submitted"
