@@ -250,41 +250,6 @@ confirm PC1 captures compositional patterns beyond sampling effort artifacts.
 
 ---
 
-## Acknowledgments Section
-
-### AI Assistance Disclosure
-
-**Template text (choose level of detail):**
-
-**Brief:**
-```
-We acknowledge the use of Claude (Anthropic) for code organization and documentation.
-All analyses were designed and validated by the authors.
-```
-
-**Moderate:**
-```
-Code organization, documentation, and reproducibility enhancements were assisted by
-Claude (Anthropic, Claude Sonnet 4.5). All statistical analyses, data filtering
-decisions, and scientific interpretations were designed and validated by the authors.
-See CLAUDE.md in the repository for details on AI-assisted development.
-```
-
-**Detailed:**
-```
-This project employed AI-assisted code development using Claude (Anthropic, Claude
-Sonnet 4.5) for:
-• Standardizing script structure and documentation
-• Generating sensitivity analyses and diagnostic scripts
-• Creating comprehensive repository documentation
-• Organizing outputs for public release
-
-All scientific decisions (study design, data filtering, statistical approaches,
-interpretations) were made by the authors. All AI-generated code was reviewed and
-validated by ACS before inclusion. See CLAUDE.md in the repository for a complete
-description of AI-assisted versus author-directed work.
-```
-
 ---
 
 ## References for Methods

@@ -12,15 +12,13 @@
 - [x] **README.md** - Comprehensive overview with quick start guide
 - [x] **LICENSE** - CC-BY 4.0 license file
 - [x] **CITATION.cff** - Machine-readable citation information
-- [x] **DATA_AVAILABILITY.md** - Data availability statement for manuscript
-- [x] **DATA_SUBSETTING.md** - Transparent documentation of filtering decisions
-- [x] **CLAUDE.md** - Documentation of AI-assisted code development
-- [x] **CODEBASE_AUDIT.md** - Complete audit of code organization
+- [x] **docs/DATA_AVAILABILITY.md** - Data availability statement for manuscript
+- [x] **docs/DATA_SUBSETTING.md** - Transparent documentation of filtering decisions
+- [x] **docs/CODEBASE_AUDIT.md** - Complete audit of code organization
 
 ### Analysis Documentation
-- [x] **ZERO_INFLATION_PCA_ASSESSMENT.md** - Assessment of PCA validity with zero-inflated data
-- [x] **MANUSCRIPT_REVISION_SUMMARY.md** - Summary of major revisions and analyses
-- [x] **FIGURE_GUIDE_FOR_PUBLICATION.md** - Guide to all publication figures
+- [x] **docs/ZERO_INFLATION_PCA_ASSESSMENT.md** - Assessment of PCA validity with zero-inflated data
+- [x] **docs/FIGURE_GUIDE_FOR_PUBLICATION.md** - Guide to all publication figures
 
 ### Code Organization
 - [x] All scripts have clear headers with purpose and dependencies
@@ -170,12 +168,7 @@ Include the following text:
 > - Comprehensive documentation of all filtering and analytical decisions
 > - Sensitivity analyses for all major findings
 >
-> See DATA_AVAILABILITY.md and DATA_SUBSETTING.md for detailed information on data structure, filtering decisions, and reproducibility.
-
-### In Manuscript Acknowledgments
-Consider adding:
-
-> We acknowledge the use of Claude (Anthropic) for code organization, documentation, and reproducibility enhancements. All AI-generated code was reviewed and validated by the authors. See CLAUDE.md in the repository for details.
+> See docs/DATA_AVAILABILITY.md and docs/DATA_SUBSETTING.md for detailed information on data structure, filtering decisions, and reproducibility.
 
 ---
 
@@ -267,7 +260,7 @@ Code and data available at: https://doi.org/10.5281/zenodo.XXXXXXX
 
 **Last Checked:** 2026-01-13
 
-**Checked By:** Adrian Stier + Claude Code Assistant
+**Checked By:** Adrian Stier
 
 **Confidence Level:** HIGH - All essential documentation complete, code tested, outputs verified
 

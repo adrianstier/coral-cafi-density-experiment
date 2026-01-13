@@ -29,33 +29,33 @@ This repository contains all data, code, and outputs for analyzing a field exper
 ```
 .
 ├── README.md                           # This file
-├── REPRODUCIBILITY_GUIDE.md            # Step-by-step reproduction instructions
+├── docs/                               # Documentation
+│   ├── REPRODUCIBILITY_GUIDE.md        # Step-by-step reproduction instructions
+│   ├── DATA_AVAILABILITY.md            # Data sharing and access policy
+│   ├── DATA_SUBSETTING.md              # Filtering decisions and justification
+│   ├── MANUSCRIPT_TEXT_TEMPLATES.md    # Methods/Results text for manuscript
+│   ├── PUBLICATION_CHECKLIST.md        # Pre-submission verification
+│   ├── FIGURE_GUIDE_FOR_PUBLICATION.md # Guide to publication figures
+│   └── ZERO_INFLATION_PCA_ASSESSMENT.md # PCA validity assessment
 ├── data/                               # Raw data files
-│   └── MRB/
-│       ├── coral/                      # Coral growth measurements (3D photogrammetry)
-│       ├── cafi/                       # CAFI community data
-│       └── physiology/                 # Coral tissue trait data
-├── scripts/                            # Analysis scripts (run in order)
-│   └── MRB/
-│       ├── 1.data-organization.R       # Data import and organization
-│       ├── 2.exploratory-figures.R     # Exploratory data visualization
-│       ├── 3.cafi-community.R          # CAFI community analysis
-│       ├── 4d.cafi-diversity.R         # CAFI diversity metrics
-│       ├── 5.cafi-composition.R        # CAFI community composition (NMDS, PERMANOVA)
-│       ├── 6.coral-growth.R            # Coral growth analysis (MAIN SCRIPT)
-│       ├── 7.coral-physiology.R        # Coral physiological metrics
-│       ├── 8.cafi-coral-community.R    # CAFI-coral performance relationships
-│       ├── 12.publication-figures.R    # Generate publication-quality figures
-│       └── 14.compile-manuscript-statistics.R  # Compile all stats for manuscript
-├── output/                             # Analysis outputs
-│   └── MRB/
-│       ├── figures/                    # All generated figures
-│       │   └── publication-figures/    # Final publication figures
-│       ├── tables/                     # Statistical summary tables
-│       ├── MANUSCRIPT_STATS_TABLE.csv  # Complete statistical results
-│       ├── KEY_STATISTICS_FOR_MANUSCRIPT.md  # Quick reference for key results
-│       ├── MANUSCRIPT_UPDATE_SUMMARY.md      # Summary of analysis updates
-│       └── archive/                    # Archived development files
+│   └── MRB Amount/
+│       ├── 1. mrb_fe_cafi_*.csv        # CAFI community data
+│       ├── coral_id_position_*.csv     # Treatment assignments
+│       └── ...                         # Coral physiology and growth data
+├── scripts/MRB/                        # Analysis scripts (run in order)
+│   ├── 1.libraries.R                   # Package loading
+│   ├── 3.abundance.R                   # CAFI abundance analysis
+│   ├── 4d.diversity.R                  # CAFI diversity metrics
+│   ├── 6.coral-growth.R                # Coral growth analysis (MAIN SCRIPT)
+│   ├── 7.coral-physiology.R            # Coral physiological metrics
+│   ├── 8.coral-caffi.R                 # CAFI-coral relationships
+│   ├── 12.nmds_permanova_cafi.R        # Community composition
+│   ├── 14.compile-manuscript-statistics.R  # Compile all stats
+│   └── generate_publication_figures.R  # Publication figures
+├── output/MRB/                         # Analysis outputs
+│   ├── figures/                        # All generated figures
+│   ├── tables/                         # Statistical summary tables
+│   └── objects/                        # R session info
 └── .gitignore                          # Git ignore rules
 ```
 
@@ -320,5 +320,5 @@ This work is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/
 
 ---
 
-**Last Updated:** November 15, 2025
-**Status:** Ready for peer review and reproducibility assessment
+**Last Updated:** January 13, 2026
+**Status:** Ready for publication
