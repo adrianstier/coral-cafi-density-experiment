@@ -38,7 +38,9 @@
 # §0) SETUP / HOUSEKEEPING — reproducibility, packages, dirs, theme, helpers
 # =============================================================================
 
-# Source centralized figure standards
+# Source centralized libraries, utilities, and figure standards
+source("scripts/MRB/1.libraries.R")
+source("scripts/MRB/utils.R")  # Provides ALIVE_THRESH, strip_fe(), load functions
 source("scripts/MRB/mrb_figure_standards.R")
 
 set.seed(1234)
@@ -47,24 +49,8 @@ options(stringsAsFactors = FALSE,
         dplyr.summarise.inform = FALSE,
         readr.show_col_types = FALSE)
 
-# add readxl to required pkgs
-.required_pkgs <- c(
-  "here","glue","cli",
-  "dplyr","tidyr","tibble","stringr","purrr","readr","forcats",
-  "ggplot2","patchwork","scales","ggrepel",
-  "vegan","indicspecies","gt","cluster","readxl"   # <-- added
-)
-
-# Alive threshold (coral-level inclusion)
-ALIVE_THRESH <- 0.80
-
-.missing <- .required_pkgs[!vapply(.required_pkgs, requireNamespace, logical(1), quietly = TRUE)]
-if (length(.missing)) {
-  stop("Missing packages: ", paste(.missing, collapse = ", "),
-       "\nInstall via install.packages(c(", paste(sprintf('\"%s\"', .missing), collapse = ", "), "))")
-}
-invisible(lapply(.required_pkgs, library, character.only = TRUE))
-cli::cli_alert_success("Loaded {length(.required_pkgs)} packages.")
+# All packages loaded via source("scripts/MRB/1.libraries.R") above
+# ALIVE_THRESH defined in utils.R (0.80)
 
 # Paths
 DATA_DIR <- here::here("data")
@@ -83,16 +69,9 @@ cli::cli_alert_info("TAB_DIR: {TAB_DIR}")
 # Use theme_publication() from mrb_figure_standards.R
 # Use save_figure() from mrb_figure_standards.R or save_both() from utils.R
 #
-# Legacy aliases for backward compatibility:
+# Legacy aliases for backward compatibility (save_both, show_and_save provided by utils.R)
 cols_trt <- TREATMENT_COLORS
 theme_pub <- theme_publication
-save_both <- function(plot, stub, width = 8, height = 6, dpi = 600) {
-  save_figure(plot, stub, width = width, height = height, dpi = dpi)
-}
-show_and_save <- function(plot, filepath, width = 8, height = 6, dpi = 600) {
-  print(plot)
-  save_figure(plot, tools::file_path_sans_ext(filepath), width = width, height = height, dpi = dpi)
-}
 
 # ----------------------------- 10×10 FILTER CONFIG ---------------------------
 # "10×10" means: keep species with prevalence ≥ PREV_MIN corals AND total abundance ≥ ABUND_MIN.
@@ -108,7 +87,7 @@ N_ITER_PERM <- 1000
 N_PER_TREAT <- 3
 
 # ------------------------------ Utility helpers ------------------------------
-strip_fe <- function(x) stringr::str_remove(as.character(x), "^FE-")
+# strip_fe() defined in utils.R - sourced above
 
 # Guarded scaler: z-score columns; if a column has 0 variance, leave it as 0
 safe_scale <- function(X) {

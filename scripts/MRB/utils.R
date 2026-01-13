@@ -30,7 +30,39 @@
 #   UTILITIES:
 #     - get_taxonomic_resolution()
 #     - safe_view()
+#     - strip_fe()
+#
+#   CONSTANTS:
+#     - ALIVE_THRESH (coral survival threshold: 0.80)
 # ==============================================================================
+
+# ==============================================================================
+# SHARED CONSTANTS
+# ==============================================================================
+
+#' Coral survival threshold
+#'
+#' Corals with tissue survival >= this threshold are included in analyses.
+#' Standard value: 80% alive (0.80)
+ALIVE_THRESH <- 0.80
+
+# ==============================================================================
+# DATA TRANSFORMATION HELPERS
+# ==============================================================================
+
+#' Strip FE- prefix from coral IDs
+#'
+#' Standardizes coral ID format by removing the "FE-" prefix.
+#' Raw data uses "FE-POC61" format, processed data uses "POC61".
+#'
+#' @param x Character vector of coral IDs
+#' @return Character vector with FE- prefix removed
+#' @examples
+#' strip_fe("FE-POC61")  # Returns "POC61"
+#' strip_fe(c("FE-POC61", "FE-POC62"))  # Returns c("POC61", "POC62")
+strip_fe <- function(x) {
+  stringr::str_remove(as.character(x), "^FE-")
+}
 
 # ==============================================================================
 # DATA LOADING FUNCTIONS
@@ -279,6 +311,27 @@ save_figure <- function(filename, plot = ggplot2::last_plot(),
   message("✅ Saved: ", filename)
 }
 
+#' Show and save a plot (backward compatibility alias)
+#'
+#' Prints plot to screen and saves to file. Wrapper for backward compatibility.
+#' Supports both (w, h) and (width, height) argument naming for flexibility.
+#'
+#' @param plot ggplot object
+#' @param filename File path (extension stripped automatically)
+#' @param w Width in inches (alias for width)
+#' @param h Height in inches (alias for height)
+#' @param width Width in inches (overrides w if both provided)
+#' @param height Height in inches (overrides h if both provided)
+#' @param ... Additional arguments passed to save_figure (excluding width/height)
+show_and_save <- function(plot, filename, w = 8, h = 6, width = NULL, height = NULL, ...) {
+  # Support both (w, h) and (width, height) naming conventions
+  final_width <- if (!is.null(width)) width else w
+  final_height <- if (!is.null(height)) height else h
+  print(plot)
+  save_figure(plot = plot, filename = tools::file_path_sans_ext(filename),
+              width = final_width, height = final_height, ...)
+}
+
 # ==============================================================================
 # COMMUNITY ANALYSIS FUNCTIONS
 # ==============================================================================
@@ -471,4 +524,5 @@ message("✅ CAFI utils loaded successfully")
 message("📦 Functions available:")
 message("  Data: load_cafi_data(), load_treatment_data(), load_coral_growth_data()")
 message("  Themes: theme_cafi(), theme_cafi_pub()")
-message("  Helpers: save_both(), save_figure(), create_community_matrix(), fit_reef_lmm()")
+message("  Helpers: save_both(), save_figure(), show_and_save(), create_community_matrix()")
+message("  Constants: ALIVE_THRESH, strip_fe()")

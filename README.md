@@ -309,7 +309,7 @@ Stier, A.C., Primo, A., Curtis, J.S., & Osenberg, C.W. (2025). Habitat quantity 
 
 ## License
 
-[Add license information]
+This work is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) (Creative Commons Attribution 4.0 International). See [LICENSE](LICENSE) for details.
 
 ---
 

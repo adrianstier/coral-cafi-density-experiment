@@ -59,15 +59,7 @@ source("scripts/MRB/1.libraries.R")
 source("scripts/MRB/utils.R")
 source("scripts/MRB/mrb_figure_standards.R")  # For colors, themes, save functions
 
-# Backward-compatible aliases for old function names
-show_and_save <- function(plot, filename, w = 8, h = 6, ...) {
-  # Remove file extension if present
-  filename <- tools::file_path_sans_ext(filename)
-  save_figure(plot = plot, filename = filename, width = w, height = h, ...)
-}
-
-save_both <- show_and_save  # Alias
-
+# Backward-compatible aliases (show_and_save, save_both) provided by utils.R
 
 # ---- 1. Setup ----------------------------------------------------------------
 set.seed(42)
@@ -88,8 +80,7 @@ update_geom_defaults("boxplot",  list(linewidth = 0.5))
 update_geom_defaults("point",    list(size = 2))
 update_geom_defaults("line",     list(linewidth = 0.8))
 
-strip_fe     <- function(x) str_remove(x, "^FE-")
-alive_thresh <- 0.80
+# strip_fe() and ALIVE_THRESH defined in utils.R - sourced above
 
 # Output dirs
 out_dir_fig  <- here("output", "MRB", "figures", "coral")
@@ -268,7 +259,7 @@ cli::cli_h2("Visualizing percent alive to justify 80% cutoff")
 
 p_alive_hist <- ggplot(coral_treatment, aes(percent_alive)) +
   geom_histogram(binwidth = 0.05, fill = "#3182BD", color = "white") +
-  geom_vline(xintercept = alive_thresh, linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = ALIVE_THRESH, linetype = "dashed", linewidth = 1) +
   scale_x_continuous(labels = percent_format(accuracy = 1)) +
   labs(title = "% Alive distribution (May 2021)",
        x = "Proportion alive", y = "Count") +
@@ -288,7 +279,7 @@ p_alive_trt <- meta_trt %>%
   geom_violin(trim = FALSE, alpha = 0.6, colour = NA) +
   geom_boxplot(width = 0.2, fill = "white", outlier.shape = NA) +
   geom_jitter(width = 0.15, alpha = 0.6, size = 1.8, colour = "gray30") +
-  geom_hline(yintercept = alive_thresh, linetype = 2) +
+  geom_hline(yintercept = ALIVE_THRESH, linetype = 2) +
   scale_y_continuous(labels = percent_format()) +
   scale_fill_treatment(guide = "none") +
   labs(title = "Percent Alive by Treatment (dashed = 80% cutoff)",
@@ -300,10 +291,10 @@ show_and_save(p_alive_trt,
               w = 7, h = 5)
 
 keep_ids <- coral_treatment %>%
-  filter(percent_alive >= alive_thresh) %>%
+  filter(percent_alive >= ALIVE_THRESH) %>%
   pull(coral_id)
 
-cli::cli_alert_info("{length(keep_ids)} colonies retained (>= {alive_thresh*100}% alive).")
+cli::cli_alert_info("{length(keep_ids)} colonies retained (>= {ALIVE_THRESH*100}% alive).")
 
 coral_treatment_f <- coral_treatment %>% filter(coral_id %in% keep_ids)
 

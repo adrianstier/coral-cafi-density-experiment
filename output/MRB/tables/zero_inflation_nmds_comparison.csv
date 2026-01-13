@@ -1,0 +1,4 @@
+distance,stress,converged,interpretation
+bray,0.20114511462479154,1,Poor
+jaccard,0.20114511462479154,0,Poor
+gower,0.23140050238367654,0,Poor

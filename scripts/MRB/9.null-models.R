@@ -303,9 +303,9 @@ p_global <- ggplot(plot_data, aes(x = sim)) +
   geom_histogram(aes(fill = type), bins = 40, alpha = 0.85,
                  color = "black", linewidth = 0.5) +
   geom_vline(data = obs_values, aes(xintercept = observed),
-             color = "#D55E00", linetype = "dashed", linewidth = 1.5) +
+             color = ACCENT_COLOR_ALT, linetype = "dashed", linewidth = 1.5) +
   facet_wrap(~ type, scales = "free", ncol = 2) +
-  scale_fill_manual(values = c("Incidence" = "#0072B2", "Abundance" = "#009E73"),
+  scale_fill_manual(values = c("Incidence" = ACCENT_COLOR, "Abundance" = TREATMENT_COLORS["6"]),
                     name = "Data Type") +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   labs(
@@ -495,11 +495,11 @@ p_bootstrap <- ggplot(boot_df, aes(x = Cscore)) +
   geom_histogram(aes(fill = type), bins = 35, alpha = 0.85,
                  color = "black", linewidth = 0.5) +
   geom_vline(data = boot_summary, aes(xintercept = Avg_Observed),
-             color = "#D55E00", linetype = "solid", linewidth = 1.8) +
+             color = ACCENT_COLOR_ALT, linetype = "solid", linewidth = 1.8) +
   geom_vline(data = boot_summary, aes(xintercept = Avg_Null),
-             color = "#0072B2", linetype = "dashed", linewidth = 1.5) +
+             color = ACCENT_COLOR, linetype = "dashed", linewidth = 1.5) +
   facet_wrap(~ type, scales = "free", ncol = 2) +
-  scale_fill_manual(values = c("Incidence" = "#56B4E9", "Abundance" = "#009E73")) +
+  scale_fill_manual(values = c("Incidence" = TREATMENT_COLORS["3"], "Abundance" = TREATMENT_COLORS["6"])) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   labs(
     title = "Bootstrap Resampling Distributions",

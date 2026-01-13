@@ -17,21 +17,7 @@ source("scripts/MRB/mrb_figure_standards.R")
 # ------------------------------------------------------------------------------
 # 0) Setup
 # ------------------------------------------------------------------------------
-suppressPackageStartupMessages({
-  library(here)
-  library(dplyr)
-  library(tidyr)
-  library(tibble)
-  library(purrr)
-  library(vegan)
-  library(cluster)         # for Gower (daisy)
-  library(ggplot2)
-  library(gt)
-  library(glue)
-  library(RColorBrewer)
-  library(readr)
-  library(cli)
-})
+# All packages loaded via source("scripts/MRB/1.libraries.R") above
 
 set.seed(1234)
 options(stringsAsFactors = FALSE, scipen = 999, dplyr.summarise.inform = FALSE)
@@ -43,14 +29,7 @@ dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
 
 # ---- Save helpers (use centralized functions) -------------------------------
-# Legacy aliases for backward compatibility:
-save_both <- function(plot, stub, width = 8, height = 6, dpi = 600) {
-  save_figure(plot, stub, width = width, height = height, dpi = dpi)
-}
-show_and_save <- function(plot, filepath, width = 8, height = 6, dpi = 600) {
-  print(plot)
-  save_figure(plot, tools::file_path_sans_ext(filepath), width = width, height = height, dpi = dpi)
-}
+# Legacy aliases (save_both, show_and_save) provided by utils.R
 
 # ------------------------------------------------------------------------------
 # 1) Load and prepare data (no sourcing)
@@ -59,7 +38,7 @@ show_and_save <- function(plot, filepath, width = 8, height = 6, dpi = 600) {
 #      - Growth:      data/processed/coral_growth.csv      (expects coral_id, treatment [or in physio])
 #      - Physio:      output/MRB/figures/coral/physio/physio_metrics_plus_growth_filtered.csv
 # ------------------------------------------------------------------------------
-strip_fe <- function(x) gsub("^FE-", "", as.character(x))
+# strip_fe() defined in utils.R - sourced above
 
 cafi_path   <- here::here("data", "MRB Amount", "1. mrb_fe_cafi_summer_2021_v4_AP_updated_2024.csv")
 growth_path <- here::here("data", "processed", "coral_growth.csv")

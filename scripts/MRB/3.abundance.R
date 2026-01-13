@@ -1,5 +1,5 @@
 # ==============================================================================
-# File: 05_MRB_community_abundance_analysis.R
+# File: 3.abundance.R
 # Purpose: Build species/community matrices, quantify observed vs. expected totals,
 #          richness metrics, and output publication-ready figures for MRB CAFI data.
 # Inputs:  data/MRB Amount/1. mrb_fe_cafi_summer_2021_v4_AP_updated_2024.csv
@@ -8,7 +8,7 @@
 #          output/MRB/data/top_species_treatment_data.csv (tidy top-species data)
 #          output/MRB/objects/mrb_comm_summaries.rds       (key R objects)
 # Depends: R (>= 4.3), tidyverse, here, stringr, vegan, patchwork, cli
-# Run after: 01_download_raw.R, 02_clean_merge.R (or ensure raw files are present)
+# Run after: 2.taxonomic-coverage.R (or ensure raw files are present)
 # Author: Adrian C. Stier
 # Date: 2025-07-22
 # Repro notes: set.seed() used for all bootstrapping
@@ -18,7 +18,9 @@
 # 0. SETUP / HOUSEKEEPING
 # ==============================================================================
 
-# Source centralized figure standards (for theme and save functions)
+# Source centralized libraries, utilities, and figure standards
+source("scripts/MRB/1.libraries.R")
+source("scripts/MRB/utils.R")
 source("scripts/MRB/mrb_figure_standards.R")
 
 ## 0.1 Reproducibility settings ----------------------------------------------
@@ -26,16 +28,7 @@ set.seed(1234)                           # for any stochastic procedures
 options(stringsAsFactors = FALSE, scipen = 999)  # avoid factors and sci. notation
 
 ## 0.2 Required packages ------------------------------------------------------
-required_pkgs <- c(
-  "here","dplyr","tidyr","readr","ggplot2","patchwork",
-  "vegan","gt","tibble","stringr","lme4","broom.mixed","car",
-  "purrr","lmerTest","cli","fitdistrplus",
-  "performance","emmeans","MASS","broom","fs","forcats"
-)
-
-missing_pkgs <- required_pkgs[!vapply(required_pkgs, requireNamespace, logical(1), quietly = TRUE)]
-if (length(missing_pkgs)) stop("Please install missing packages: ", paste(missing_pkgs, collapse = ", "))
-invisible(lapply(required_pkgs, library, character.only = TRUE))
+# All packages loaded via source("scripts/MRB/1.libraries.R") above
 
 ## 0.3 Paths ------------------------------------------------------------------
 DATA_DIR   <- here("data", "MRB Amount")

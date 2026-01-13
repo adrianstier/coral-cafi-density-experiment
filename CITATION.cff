@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite it as below."
+title: "Habitat quantity drives community assembly and feedbacks to coral performance"
+type: software
+authors:
+  - family-names: Stier
+    given-names: Adrian C.
+    email: adrian.stier@lifesci.ucsb.edu
+    affiliation: "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara"
+    orcid: "https://orcid.org/0000-0002-3494-0526"
+  - family-names: Primo
+    given-names: Alexander
+    affiliation: "Odum School of Ecology, University of Georgia"
+  - family-names: Curtis
+    given-names: Joseph S.
+    affiliation: "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara; Bigelow Laboratory for Ocean Sciences"
+  - family-names: Osenberg
+    given-names: Craig W.
+    affiliation: "Odum School of Ecology, University of Georgia"
+version: 1.0.0
+date-released: 2025-01-11
+repository-code: "https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT"
+license: CC-BY-4.0
+keywords:
+  - coral reef ecology
+  - community assembly
+  - habitat quantity
+  - density dependence
+  - coral-associated fauna
+  - Pocillopora
+  - Moorea
+  - field experiment
+abstract: >
+  Analysis code and data for a field experiment examining how coral habitat
+  quantity (1, 3, or 6 colonies per reef patch) affects coral-associated fish
+  and invertebrate (CAFI) community assembly and feedbacks to coral performance
+  in Moorea, French Polynesia. Includes R scripts for statistical analyses
+  (linear mixed models, PERMANOVA, PCA), figure generation, and reproducibility
+  documentation.
+references:
+  - type: article
+    authors:
+      - family-names: Stier
+        given-names: Adrian C.
+      - family-names: Primo
+        given-names: Alexander
+      - family-names: Curtis
+        given-names: Joseph S.
+      - family-names: Osenberg
+        given-names: Craig W.
+    title: "Habitat quantity drives community assembly and feedbacks to coral performance"
+    journal: "Ecology Letters"
+    year: 2025
+    status: "submitted"

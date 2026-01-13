@@ -270,7 +270,7 @@ p_cond_load <- ggplot(df_cond_load, aes(
   x = reorder(feature, loading),
   y = loading
 )) +
-  geom_col(fill = "#1b9e77") +
+  geom_col(fill = ACCENT_COLOR) +  # Use standard accent color from mrb_figure_standards.R
   coord_flip() +
   labs(
     x = NULL,
@@ -283,7 +283,7 @@ p_comm_load <- ggplot(df_comm_load, aes(
   x = reorder(feature, loading),
   y = loading
 )) +
-  geom_col(fill = "#d95f02") +
+  geom_col(fill = ACCENT_COLOR_ALT) +  # Use standard alt accent color
   coord_flip() +
   labs(
     x = NULL,
@@ -383,7 +383,7 @@ p_rda_load <- ggplot(rda_load, aes(
   x = reorder(metric, loading),
   y = loading
 )) +
-  geom_col(fill = "#3182BD") +
+  geom_col(fill = ACCENT_COLOR) +
   coord_flip() +
   labs(
     subtitle = "B) Condition Metrics Loadings on RDA₁ (Inverted)",
@@ -798,7 +798,7 @@ p_rda_corr <- ggplot(corr_table, aes(
   x = reorder(species, cor_rda1),
   y = cor_rda1
 )) +
-  geom_col(fill="#3182BD") +
+  geom_col(fill = ACCENT_COLOR) +
   coord_flip() +
   labs(
     x     = "Species",
@@ -916,13 +916,13 @@ for (sp in corr_table$species) {
   
   # 4) scatterplot: abundance vs flipped RDA₁
   p2 <- ggplot(df_sp, aes(x = abundance, y = rda1f)) +
-    geom_point(alpha = 0.7, color = "#3182BD") +
-    geom_smooth(method = "lm", se = TRUE, color = "#3182BD") +
+    geom_point(alpha = 0.7, color = ACCENT_COLOR) +
+    geom_smooth(method = "lm", se = TRUE, color = ACCENT_COLOR) +
     annotate("text",
              x = Inf, y = Inf,
              label = paste0("R² = ", round(r2_rda, 3),
                             "\nP = ", signif(p_rda, 3)),
-             hjust = 1.1, vjust = 1.1, size = 4, color = "#3182BD") +
+             hjust = 1.1, vjust = 1.1, size = 4, color = ACCENT_COLOR) +
     labs(
       title = paste0(sp, " — Abundance vs RDA₁ (flipped)"),
       x     = "Abundance",

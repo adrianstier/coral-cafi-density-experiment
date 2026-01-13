@@ -25,14 +25,17 @@ suppressPackageStartupMessages({
   library(gt)
 })
 
-# Publication directories
-PUB_DIR <- here("output", "figures_mrb", "publication")
-SUP_DIR <- here("output", "figures_mrb", "publication", "supplemental")
+# Source centralized figure standards (provides TREATMENT_COLORS, theme_publication, etc.)
+source("scripts/MRB/mrb_figure_standards.R")
+
+# Publication directories (follows standard output/MRB/figures/ structure)
+PUB_DIR <- here("output", "MRB", "figures", "publication")
+SUP_DIR <- here("output", "MRB", "figures", "publication", "supplemental")
 dir.create(PUB_DIR, recursive = TRUE, showWarnings = FALSE)
 dir.create(SUP_DIR, recursive = TRUE, showWarnings = FALSE)
 
-# Color palette (from paper)
-cols_trt <- c("1" = "#FFD92F", "3" = "#8DA0CB", "6" = "#66C2A5")
+# Use standard treatment colors from mrb_figure_standards.R
+cols_trt <- TREATMENT_COLORS
 
 # Theme for publication
 theme_pub <- function(base_size = 11) {

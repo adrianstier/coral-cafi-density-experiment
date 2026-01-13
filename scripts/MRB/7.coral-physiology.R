@@ -71,20 +71,10 @@ source("scripts/MRB/1.libraries.R")
 source("scripts/MRB/utils.R")
 source("scripts/MRB/mrb_figure_standards.R")  # For colors, themes, save functions
 
-# Backward-compatible aliases for old function names
-show_and_save <- function(plot, filename, w = 8, h = 6, ...) {
-  # Display the plot
-  print(plot)
-  # Remove file extension if present
-  filename <- tools::file_path_sans_ext(filename)
-  save_figure(plot = plot, filename = filename, width = w, height = h, ...)
-}
-
-save_both <- show_and_save  # Alias
+# Backward-compatible aliases (show_and_save, save_both) provided by utils.R
 
 # ---- Setup from script 6 (needed for compatibility) --------------------------
-strip_fe     <- function(x) str_remove(x, "^FE-")
-alive_thresh <- 0.80
+# strip_fe() and ALIVE_THRESH defined in utils.R - sourced above
 
 # Output dirs
 out_dir_fig  <- here("output", "MRB", "figures", "coral")

@@ -83,5 +83,6 @@ library(fitdistrplus) # Fitting distributions
 library(performance)  # Model performance checks
 library(car)          # Companion to Applied Regression
 library(fs)           # File system operations
+library(RColorBrewer) # Color palettes (used in script 12)
 
 cat("✅ All libraries loaded successfully\n")

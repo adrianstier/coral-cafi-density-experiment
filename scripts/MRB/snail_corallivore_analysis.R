@@ -14,18 +14,10 @@
 #   - Associated figures
 # ==============================================================================
 
-# Load libraries
-library(here)
-library(tidyverse)
-library(lme4)
-library(lmerTest)
-library(emmeans)
-library(broom.mixed)
-library(knitr)
-library(rmarkdown)
-
-# Load figure standards
-source(here("scripts/MRB/mrb_figure_standards.R"))
+# Load libraries, utilities, and figure standards
+source("scripts/MRB/1.libraries.R")
+source("scripts/MRB/utils.R")
+source("scripts/MRB/mrb_figure_standards.R")
 
 # Set output directory
 out_dir <- here("output/MRB/snail_analysis")
@@ -261,8 +253,8 @@ results$species <- species_results
 # 6. Create Figures
 # ==============================================================================
 
-# Treatment colors
-cols_trt <- c("1" = "#E69F00", "3" = "#56B4E9", "6" = "#009E73")
+# Treatment colors - use standard TREATMENT_COLORS from mrb_figure_standards.R
+cols_trt <- TREATMENT_COLORS
 
 # 6.1 Snail abundance by treatment
 p_abundance <- ggplot(snail_summary, aes(x = treatment, y = total_snails, fill = treatment)) +

@@ -1,0 +1,6 @@
+transformation,det_correlation,kmo_category
+raw,9.572234493896908e-17,Poor
+sqrt,4.844588763687466e-16,Poor
+hellinger,8.590003425340218e-17,Poor
+log1p,8.9763517688252e-16,Poor
+wisconsin,3.4789888204639355e-29,Poor

@@ -61,7 +61,9 @@
 # 0) SETUP / HOUSEKEEPING
 # =============================================================================
 
-# Source centralized figure standards
+# Source centralized libraries, utilities, and figure standards
+source("scripts/MRB/1.libraries.R")
+source("scripts/MRB/utils.R")  # Provides ALIVE_THRESH, strip_fe(), load_cafi_data(), etc.
 source("scripts/MRB/mrb_figure_standards.R")
 
 ## 0.1 Reproducibility & global options ----------------------------------------
@@ -74,33 +76,7 @@ options(
 )
 
 ## 0.2 Packages -----------------------------------------------------------------
-required_pkgs <- c(
-  # core
-  "here", "glue", "cli",
-  # data wrangling
-  "dplyr", "tidyr", "tibble", "stringr", "purrr", "readr", "forcats",
-  # plotting
-  "ggplot2", "patchwork", "scales",
-  # ecology
-  "vegan",
-  # modeling & tables
-  "lme4", "lmerTest", "broom.mixed", "car", "gt"
-)
-
-missing_pkgs <- required_pkgs[!vapply(required_pkgs, requireNamespace, logical(1), quietly = TRUE)]
-if (length(missing_pkgs)) {
-  stop(
-    "Missing packages: ", paste(missing_pkgs, collapse = ", "),
-    "\nInstall them with:\ninstall.packages(c(", 
-    paste(sprintf('"%s"', missing_pkgs), collapse = ", "), "))"
-  )
-}
-
-suppressPackageStartupMessages({
-  lapply(required_pkgs, library, character.only = TRUE)
-})
-
-cli::cli_alert_success("Loaded {length(required_pkgs)} packages.")
+# All packages loaded via source("scripts/MRB/1.libraries.R") above
 
 
 
@@ -124,8 +100,8 @@ TOP_N_LOAD     <- 20
 
 ## 0.5 Utilities ---------------------------------------------------------------
 
-# Remove "FE-" prefix from coral IDs (consistent IDs across files)
-strip_fe <- function(x) stringr::str_remove(x, "^FE-")
+# strip_fe() defined in utils.R - sourced above
+# (Removes "FE-" prefix from coral IDs for consistent IDs across files)
 
 # ---- Colors & Theme ----------------------------------------------------------
 # Use TREATMENT_COLORS from mrb_figure_standards.R:
@@ -135,20 +111,13 @@ strip_fe <- function(x) stringr::str_remove(x, "^FE-")
 # Use theme_publication() from mrb_figure_standards.R
 # Use save_figure() from mrb_figure_standards.R
 #
-# Legacy aliases for backward compatibility:
+# Legacy aliases for backward compatibility (save_both, show_and_save provided by utils.R)
 cols_trt <- TREATMENT_COLORS
 theme_pub <- theme_publication
-save_both <- function(plot, stub, width = 8, height = 6, dpi = 600) {
-  save_figure(plot, stub, width = width, height = height, dpi = dpi)
-}
-show_and_save <- function(plot, filepath, width = 8, height = 6, dpi = 600) {
-  print(plot)
-  save_figure(plot, tools::file_path_sans_ext(filepath), width = width, height = height, dpi = dpi)
-}
 
 
-# === Bring in percent_alive & define threshold (match the other script) ===
-ALIVE_THRESH <- 0.80
+# === Bring in percent_alive (threshold defined in utils.R) ===
+# ALIVE_THRESH is defined in utils.R (0.80) - sourced at top of script
 
 # Option A (prefer): reuse the file you already export in the growth+physio pipeline
 # data/MRB Amount/coral_growth_surface_area_change_filtered.csv includes percent_alive?
@@ -242,7 +211,7 @@ dropped_species  <- setdiff(species_full_meta$species, retained_species$species)
 cli::cli_alert_info("Reading growth & physiology files…")
 
 growth_file <- here::here(DATA_DIR, "processed", "coral_growth.csv")
-physio_file <- here::here(OUT_DIR, "figures", "coral-physio",
+physio_file <- here::here(OUT_DIR, "figures", "coral", "physio",
                           "physio_metrics_plus_growth_filtered.csv")
 
 if (!file.exists(growth_file)) stop("Missing growth file at: ", growth_file)
@@ -2158,7 +2127,7 @@ library(ggraph)
 library(lme4)
 
 # --- Key change A: enforce ≥80% alive and then drop 'percent_alive' from traits
-ALIVE_THRESH <- 0.80
+# ALIVE_THRESH is defined in utils.R (0.80) - sourced at top of script
 
 # If master_df has percent_alive, use it only to FILTER, then remove it from analysis
 if ("percent_alive" %in% names(master_df)) {

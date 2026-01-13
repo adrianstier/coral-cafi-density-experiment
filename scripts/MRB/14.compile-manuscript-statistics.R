@@ -20,10 +20,12 @@
 #
 # ==============================================================================
 
-library(tidyverse)
-library(here)
-library(gt)
-library(cli)
+# Source centralized libraries, utilities, and figure standards
+source("scripts/MRB/1.libraries.R")
+source("scripts/MRB/utils.R")
+source("scripts/MRB/mrb_figure_standards.R")
+
+# All packages loaded via source("scripts/MRB/1.libraries.R") above
 
 # Create output directory
 table_dir <- here("output/MRB/tables")

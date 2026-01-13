@@ -66,6 +66,11 @@ GRADIENT_LOW <- "#0571B0"
 GRADIENT_MID <- "#F7F7F7"
 GRADIENT_HIGH <- "#CA0020"
 
+# Single-color accent for non-treatment bar charts
+# Uses CATEGORY_COLORS[5] (Blue) to distinguish from treatment colors
+ACCENT_COLOR <- "#0072B2"         # Primary accent (Blue)
+ACCENT_COLOR_ALT <- "#D55E00"     # Secondary accent (Vermillion)
+
 # ==============================================================================
 # MASTER THEME FUNCTION
 # ==============================================================================

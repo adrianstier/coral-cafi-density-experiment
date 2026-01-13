@@ -11,15 +11,10 @@
 source("scripts/MRB/mrb_figure_standards.R")
 
 # ==============================================================================
-# TREATMENT COLORS - Consistent across all figures
+# TREATMENT LABELS AND ORDER
 # ==============================================================================
-
-# Define treatment color palette (colorblind-friendly)
-TREATMENT_COLORS <- c(
-  "1" = "#E69F00",  # Orange - Single coral
-  "3" = "#56B4E9",  # Sky blue - Three corals
-  "6" = "#009E73"   # Green - Six corals
-)
+# NOTE: TREATMENT_COLORS are defined in mrb_figure_standards.R (sourced above)
+#       Do NOT redefine them here to avoid divergence
 
 # Alternative names for treatments
 TREATMENT_LABELS <- c(

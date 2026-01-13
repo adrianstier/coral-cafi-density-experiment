@@ -1,5 +1,5 @@
 Level,Metric,Term,Df,F,R2,p,sig
 Coral (strata=reef),Jaccard,Model,2,2.739911007796189,0.11789679430687329,1,
 Coral (strata=reef),Gower (sqrt→z),Model,2,2.6647360165908074,0.11503416290530129,1,
-Reef (unit-correct),Jaccard,Model,2,1.9391917335822786,0.1624223629919407,0.032,*
-Reef (unit-correct),Gower (sqrt→z),Model,2,9.60750143123008,0.4899911120714044,0.001,**
+Reef (unit-correct),Jaccard,Model,2,1.9391917335822793,0.16242236299194074,0.032,*
+Reef (unit-correct),Gower (sqrt→z),Model,2,9.607501431230082,0.4899911120714045,0.001,**
