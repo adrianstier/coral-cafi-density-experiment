@@ -8,7 +8,21 @@
 
 **Archive:** This repository is permanently archived on Zenodo with DOI: [10.5281/zenodo.18239647](https://doi.org/10.5281/zenodo.18239647)
 
-**Status:** Ready for code review and reproducibility assessment
+**Status:** Publication-ready
+
+---
+
+## Quick Links
+
+📖 **[Quick Start](#quick-start)** | 📊 **[Key Analyses](#key-analyses-and-files)** | 📚 **[Documentation](docs/)** | 🔬 **[Reproducibility](docs/REPRODUCIBILITY_GUIDE.md)** | 💬 **[Contributing](CONTRIBUTING.md)**
+
+### Highlights
+
+✅ **One-command reproduction** via `./run_all.sh`
+✅ **Data integrity validation** with checksums
+✅ **Pure R workflow** - no Python required
+✅ **Comprehensive documentation** - 8 detailed guides
+✅ **Publication-ready figures** - all in `output/MRB/figures/`
 
 ---
 
@@ -33,6 +47,9 @@ This repository contains all data, code, and outputs for analyzing a field exper
 ```
 .
 ├── README.md                           # This file
+├── CLAUDE.md                           # Claude Code configuration
+├── CONTRIBUTING.md                     # Development and contribution guide
+├── run_all.sh                          # Master script to run entire analysis
 ├── docs/                               # Documentation
 │   ├── REPRODUCIBILITY_GUIDE.md        # Step-by-step reproduction instructions
 │   ├── DATA_AVAILABILITY.md            # Data sharing and access policy
@@ -42,6 +59,7 @@ This repository contains all data, code, and outputs for analyzing a field exper
 │   ├── FIGURE_GUIDE_FOR_PUBLICATION.md # Guide to publication figures
 │   └── ZERO_INFLATION_PCA_ASSESSMENT.md # PCA validity assessment
 ├── data/                               # Raw data files
+│   ├── checksums.txt                   # MD5 checksums for data integrity
 │   └── MRB Amount/
 │       ├── 1. mrb_fe_cafi_*.csv        # CAFI community data
 │       ├── coral_id_position_*.csv     # Treatment assignments
@@ -55,12 +73,14 @@ This repository contains all data, code, and outputs for analyzing a field exper
 │   ├── 8.coral-caffi.R                 # CAFI-coral relationships
 │   ├── 12.nmds_permanova_cafi.R        # Community composition
 │   ├── 14.compile-manuscript-statistics.R  # Compile all stats
-│   └── generate_publication_figures.R  # Publication figures
+│   ├── generate_publication_figures.R  # Publication figures
+│   └── validate_pipeline.R             # Validate data integrity and outputs
 ├── output/MRB/                         # Analysis outputs
 │   ├── figures/                        # All generated figures
 │   ├── tables/                         # Statistical summary tables
 │   └── objects/                        # R session info
-└── .gitignore                          # Git ignore rules
+└── archive/                            # Archived files
+    └── python_agents/                  # Previous Python automation system
 ```
 
 ---
@@ -88,30 +108,40 @@ install.packages(c(
 
 ### Running the Analysis
 
-**Option 1: Run everything (recommended for full reproducibility)**
+**Option 1: Master Script (Recommended)**
+
+One command to reproduce the entire analysis:
+
 ```bash
-# From repository root
-Rscript scripts/MRB/1.data-organization.R
-Rscript scripts/MRB/2.exploratory-figures.R
-Rscript scripts/MRB/3.cafi-community.R
-Rscript scripts/MRB/4d.cafi-diversity.R
-Rscript scripts/MRB/5.cafi-composition.R
-Rscript scripts/MRB/6.coral-growth.R              # KEY SCRIPT
-Rscript scripts/MRB/7.coral-physiology.R
-Rscript scripts/MRB/8.cafi-coral-community.R
-Rscript scripts/MRB/12.publication-figures.R
-Rscript scripts/MRB/14.compile-manuscript-statistics.R
+./run_all.sh
 ```
 
-**Option 2: Run key manuscript analyses only**
+For core analyses only (faster):
 ```bash
+./run_all.sh --quick
+```
+
+**Option 2: Individual Scripts**
+
+Run scripts manually in order:
+
+```bash
+Rscript scripts/MRB/1.libraries.R                 # Load packages
 Rscript scripts/MRB/6.coral-growth.R              # Coral growth (allometric models)
 Rscript scripts/MRB/7.coral-physiology.R          # Physiology + integrated performance
-Rscript scripts/MRB/8.cafi-coral-community.R      # CAFI-coral relationships
+Rscript scripts/MRB/8.coral-caffi.R               # CAFI-coral relationships
 Rscript scripts/MRB/14.compile-manuscript-statistics.R  # Compile all stats
 ```
 
-**Expected runtime:** ~5-10 minutes for all scripts
+**Option 3: Validate Pipeline**
+
+Check data integrity and verify outputs:
+
+```bash
+Rscript scripts/MRB/validate_pipeline.R
+```
+
+**Expected runtime:** 5-10 minutes (full analysis) | 3-5 minutes (quick mode)
 
 ---
 
@@ -299,30 +329,65 @@ None currently. All scripts run successfully with provided data.
 
 If you use this code or data, please cite:
 
-Stier, A.C., Primo, A., Curtis, J.S., & Osenberg, C.W. (2025). Habitat quantity drives community assembly and feedbacks to coral performance in reef systems. *[Journal]*, *[Volume]*(*Issue*), *[Pages]*.
+**Manuscript:**
+```
+Stier, A.C., Primo, A., Curtis, J.S., & Osenberg, C.W. (2025). Habitat quantity
+drives community assembly and feedbacks to coral performance. Ecology Letters.
+DOI: [to be added upon publication]
+```
+
+**Data & Code Archive:**
+```
+Stier, A.C., Primo, A., Curtis, J.S., & Osenberg, C.W. (2026). Data and code for:
+Habitat quantity drives community assembly and feedbacks to coral performance [Data set].
+Zenodo. https://doi.org/10.5281/zenodo.18239647
+```
+
+---
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
+- Reporting issues or bugs
+- Suggesting improvements
+- Reproducing and verifying results
+- Adding new analyses
 
 ---
 
 ## Contact
 
-**Corresponding Author:** Adrian Stier (astier@ucsb.edu)
+**Corresponding Author:** Adrian C. Stier
+- 📧 Email: astier@ucsb.edu
+- 🔬 Affiliation: UC Santa Barbara, Dept. of Ecology, Evolution, and Marine Biology
 
-**Code Questions:** Please open an issue on GitHub or email corresponding author
+**Issues & Questions:**
+- Code/reproducibility: [Open an issue](https://github.com/adrianstier/coral-cafi-density-experiment/issues)
+- Data access: See [DATA_AVAILABILITY.md](docs/DATA_AVAILABILITY.md)
 
 ---
 
 ## License
 
-This work is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) (Creative Commons Attribution 4.0 International). See [LICENSE](LICENSE) for details.
+- **Code:** MIT License
+- **Data:** [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) (Creative Commons Attribution 4.0 International)
 
 ---
 
 ## Acknowledgments
 
-- Craig Osenberg for statistical consultation on unified allometric model approach
+- Craig W. Osenberg for statistical consultation on unified allometric model approach
 - Moorea Coral Reef LTER for field site access and support
+- French Polynesian government for research permits
 
 ---
 
-**Last Updated:** January 13, 2026
-**Status:** Ready for publication
+<div align="center">
+
+**Last Updated:** January 14, 2026
+**Repository Version:** v1.0.1
+**Status:** Publication-ready
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18239647.svg)](https://doi.org/10.5281/zenodo.18239647)
+
+</div>
