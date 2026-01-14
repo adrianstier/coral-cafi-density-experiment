@@ -16,19 +16,18 @@ This repository contains the analysis pipeline for a coral reef field experiment
 ├── data/MRB Amount/           # Raw data files
 ├── scripts/MRB/               # R analysis scripts (run in order 1-14)
 ├── output/MRB/                # Analysis outputs
-├── docs/                      # Documentation
-└── agents/                    # Python automation system (optional)
+└── docs/                      # Documentation
 ```
 
 ## Running the Analysis
 
-### Option 1: Simple Bash Script (Recommended for Reviewers)
+### Option 1: Simple Bash Script (Recommended)
 
 ```bash
 ./run_all.sh
 ```
 
-This runs the core analysis pipeline in order.
+This runs the core analysis pipeline in order. Use `./run_all.sh --quick` for core scripts only.
 
 ### Option 2: Individual Scripts (For Development)
 
@@ -40,15 +39,12 @@ Rscript scripts/MRB/8.coral-caffi.R
 Rscript scripts/MRB/14.compile-manuscript-statistics.R
 ```
 
-### Option 3: Python Agent System (Advanced)
+### Option 3: Validation Script
 
-```python
-import sys
-sys.path.insert(0, 'agents')
-from orchestrator import Orchestrator
+Check data integrity and pipeline outputs:
 
-orch = Orchestrator()
-orch.run_full_analysis()  # Runs all scripts with validation
+```bash
+Rscript scripts/MRB/validate_pipeline.R
 ```
 
 ## Key Analysis Scripts
@@ -138,14 +134,11 @@ Rscript scripts/MRB/generate_publication_figures.R
 
 Outputs will be in `output/MRB/figures/publication-figures/`
 
-### Check Data Integrity
+### Check Data Integrity and Pipeline Status
 
 ```bash
-# Verify checksums (if available)
-md5sum -c data/checksums.txt
-
-# Or use Python validation agent
-python -m agents --validate
+# Verify data checksums and pipeline outputs
+Rscript scripts/MRB/validate_pipeline.R
 ```
 
 ## File Naming Conventions
@@ -159,10 +152,10 @@ python -m agents --validate
 
 When asked to:
 
-1. **"Run the analysis"** → Use `./run_all.sh` or Python orchestrator
-2. **"Generate a figure"** → Use FigureAgent or relevant numbered script
+1. **"Run the analysis"** → Use `./run_all.sh`
+2. **"Generate a figure"** → Run relevant numbered script (e.g., `Rscript scripts/MRB/6.coral-growth.R`)
 3. **"Check statistical results"** → Read from `output/MRB/tables/`
-4. **"Validate data"** → Use ValidationAgent or check `docs/REPRODUCIBILITY_GUIDE.md`
+4. **"Validate data"** → Use `Rscript scripts/MRB/validate_pipeline.R`
 
 ## Reproducibility Verification
 

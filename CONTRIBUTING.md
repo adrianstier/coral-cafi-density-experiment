@@ -198,24 +198,18 @@ Before submitting:
    - Document in `docs/REPRODUCIBILITY_GUIDE.md`
    - Update `README.md` if major addition
 
-### Using the Python Agent System
+### Validating Your Changes
 
-To generate R code programmatically:
+Use the validation script to check data integrity and outputs:
 
-```python
-from agents import StatsAgent
-
-agent = StatsAgent()
-script, path = agent.generate_lmm_analysis_script(
-    analysis_name="new_analysis",
-    response_var="your_variable",
-    fixed_effects=["treatment", "reef_type"],
-    random_effect="reef",
-    run_script=True  # Execute immediately
-)
+```bash
+Rscript scripts/MRB/validate_pipeline.R
 ```
 
-Generated scripts go to `scripts/MRB/agent_generated/`
+This will:
+- Verify data file checksums
+- Check required files exist
+- Validate pipeline outputs are present
 
 ## Statistical Best Practices
 
