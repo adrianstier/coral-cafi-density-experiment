@@ -1,8 +1,12 @@
 # Habitat Quantity Drives Community Assembly and Feedbacks to Coral Performance
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18239647.svg)](https://doi.org/10.5281/zenodo.18239647)
+
 **Authors:** Adrian C. Stier, Alexander Primo, Joseph S. Curtis, Craig W. Osenberg
 
 **Repository:** Analysis code and data for coral density experiment examining CAFI community assembly and feedbacks to coral performance
+
+**Archive:** This repository is permanently archived on Zenodo with DOI: [10.5281/zenodo.18239647](https://doi.org/10.5281/zenodo.18239647)
 
 **Status:** Ready for code review and reproducibility assessment
 

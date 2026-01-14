@@ -7,14 +7,14 @@ All data and code associated with this manuscript are publicly available.
 ## Data Repository
 
 **Primary Repository:** GitHub
-**URL:** https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT
-**DOI:** [To be assigned upon Zenodo archival]
+**URL:** https://github.com/adrianstier/coral-cafi-density-experiment
+**DOI:** 10.5281/zenodo.18239647
 
 ## Archived Version
 
-Upon publication, a permanent archived version will be deposited at:
-- **Zenodo:** [DOI to be added]
-- **Dryad:** [DOI to be added, if applicable]
+A permanent archived version has been deposited at Zenodo:
+- **Zenodo DOI:** [10.5281/zenodo.18239647](https://doi.org/10.5281/zenodo.18239647)
+- **Archive URL:** https://zenodo.org/records/18239647
 
 ## Data Description
 
@@ -35,15 +35,16 @@ Upon publication, a permanent archived version will be deposited at:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT.git
+   git clone https://github.com/adrianstier/coral-cafi-density-experiment.git
    ```
 
 2. **Download as ZIP:**
-   - Visit the repository URL
+   - Visit the repository URL: https://github.com/adrianstier/coral-cafi-density-experiment
    - Click "Code" → "Download ZIP"
 
-3. **Archived version:**
-   - Visit the Zenodo DOI link (available upon publication)
+3. **Archived version (recommended for reproducibility):**
+   - Visit: https://doi.org/10.5281/zenodo.18239647
+   - Download the archived release (v1.0.0)
 
 ## Code Availability
 
@@ -76,8 +77,8 @@ DOI: [to be added]
 ## Contact
 
 For questions about data access:
-- **Email:** adrian.stier@lifesci.ucsb.edu
-- **Issues:** https://github.com/adrianstier/Stier-2025-CAFI136-MRB-AMOUNT/issues
+- **Email:** astier@ucsb.edu
+- **Issues:** https://github.com/adrianstier/coral-cafi-density-experiment/issues
 
 ## Ethical Statement
 
