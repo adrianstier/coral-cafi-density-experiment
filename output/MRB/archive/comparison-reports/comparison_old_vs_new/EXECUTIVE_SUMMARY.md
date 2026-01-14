@@ -1,6 +1,5 @@
 # 🔬 EXECUTIVE SUMMARY: Allometric Growth Model Update
-**Date:** November 14, 2025  
-**Analyst:** Claude Code  
+**Date:** November 14, 2025
 **Advisor:** Craig Osenberg
 
 ---

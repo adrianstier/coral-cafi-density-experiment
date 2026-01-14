@@ -47,7 +47,6 @@ This repository contains all data, code, and outputs for analyzing a field exper
 ```
 .
 ├── README.md                           # This file
-├── CLAUDE.md                           # Claude Code configuration
 ├── CONTRIBUTING.md                     # Development and contribution guide
 ├── run_all.sh                          # Master script to run entire analysis
 ├── docs/                               # Documentation

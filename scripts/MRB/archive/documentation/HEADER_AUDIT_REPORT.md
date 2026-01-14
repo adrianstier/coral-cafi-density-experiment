@@ -1,7 +1,6 @@
 # MRB Scripts Header Audit Report
 
 **Date:** 2025-11-05
-**Auditor:** Claude Code Review
 **Total Files Reviewed:** 20 R scripts
 **Template Reference:** [HEADER_TEMPLATE.md](HEADER_TEMPLATE.md)
 
