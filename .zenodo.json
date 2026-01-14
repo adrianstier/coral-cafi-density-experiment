@@ -1,0 +1,36 @@
+{
+  "title": "Habitat quantity drives community assembly and feedbacks to coral performance",
+  "description": "Analysis code and data for a field experiment examining how coral habitat quantity affects coral-associated fish and invertebrate community assembly and feedbacks to coral performance in Moorea, French Polynesia. Includes R scripts for statistical analyses, figure generation, and reproducibility documentation.",
+  "version": "v1.0.0",
+  "upload_type": "software",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Stier, Adrian C.",
+      "affiliation": "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara",
+      "orcid": "0000-0002-3494-0526"
+    },
+    {
+      "name": "Primo, Alexander",
+      "affiliation": "Odum School of Ecology, University of Georgia"
+    },
+    {
+      "name": "Curtis, Joseph S.",
+      "affiliation": "Department of Ecology, Evolution, and Marine Biology, University of California Santa Barbara"
+    },
+    {
+      "name": "Osenberg, Craig W.",
+      "affiliation": "Odum School of Ecology, University of Georgia"
+    }
+  ],
+  "keywords": [
+    "coral reef ecology",
+    "community assembly",
+    "habitat quantity",
+    "density dependence",
+    "coral-associated fauna",
+    "Pocillopora",
+    "Moorea",
+    "field experiment"
+  ]
+}
